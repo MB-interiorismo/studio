@@ -716,3 +716,34 @@ img {
   line-height: 1.8;
   color: var(--color-text-dark);
 }
+
+/* Modal Responsiveness */
+@media (max-width: 900px) {
+  .modal-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr; /* El texto se ajusta, las imgs toman el resto */
+  }
+  
+  .modal-text-col {
+    order: -1; /* Forzar el texto arriba en CSS Grid */
+    padding: 2.5rem 1.5rem 1.5rem;
+  }
+  
+  .modal-image-col {
+    order: 1; /* Forzar imágenes abajo */
+  }
+
+  .modal-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    padding-right: 2rem; /* Espacio para que el botón de cerrar no tape el texto */
+  }
+  
+  .close-btn {
+    top: 1rem;
+    right: 1rem;
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+}
