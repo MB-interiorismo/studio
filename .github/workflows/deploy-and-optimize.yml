@@ -1,0 +1,82 @@
+name: Optimize Images and Deploy to Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Prevenir ejecuciones simultáneas de deploy
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+# Permisos necesarios para pushear código y publicar en Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  optimize-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Instalar WebP
+        run: sudo apt-get update && sudo apt-get install -y webp
+
+      - name: Convertir a WebP y forzar a <200KB preservando resolución
+        run: |
+          # Activar busqueda insensible a mayusculas (JPG, jpg, PNG)
+          shopt -s nullglob nocaseglob
+          
+          # 1. Convertir imagenes JPG/PNG a WebP
+          for img in assets/uploads/*.{jpg,jpeg,png}; do
+            filename=$(basename -- "$img")
+            filename_no_ext="${filename%.*}"
+            out="assets/uploads/${filename_no_ext}.webp"
+            
+            # Usar cwebp con tamaño objetivo de 200KB (200000 bytes)
+            # El algoritmo hará pasadas múltiples reduciendo la calidad sin alterar las dimensiones
+            cwebp -size 200000 "$img" -o "$out"
+            
+            # Limpiar original
+            rm "$img"
+          done
+          
+          # 2. Verificar si algun WebP original es gigante y necesita compresión
+          for img in assets/uploads/*.webp; do
+            filesize=$(stat -c%s "$img")
+            if [ "$filesize" -gt 204800 ]; then
+              cwebp -size 200000 "$img" -o "${img}.tmp"
+              mv "${img}.tmp" "$img"
+            fi
+          done
+          
+          # 3. Reescribir el portafolio.json para emparejar la extensión
+          if [ -f data/portafolio.json ]; then
+            # Buscar menciones de .jpg, .jpeg, .png insensibles a mayúsculas y cambiarlas a .webp
+            sed -i -E 's/\.(jpg|jpeg|png)(["'"'"'])/.webp\2/gI' data/portafolio.json
+          fi
+
+      - name: Auto-Commit de JSON y Archivos Ligeros
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-compresión a WebP (<200kb) 🚀"
+
+      # --- DESPLIEGUE A GITHUB PAGES INTEGRADO ---
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
