@@ -1,6 +1,6 @@
 ## Licencia
 
-Este proyecto está distribuido bajo la **Licencia MIT**. Esto significa que es una licencia permisiva y libre, puedes clonarla, modificarla y usarla para tus propios proyectos con una única condición: **debes incluir la atribución al autor original (Emebe/Migue)** dejando intacto el archivo `LICENSE` y los derechos de autor que vienen en él.
+Este proyecto está distribuido bajo la **Licencia MIT**. Esto significa que es una licencia permisiva y libre, puedes clonarla, modificarla y usarla para tus propios proyectos con una única condición: **debes incluir la atribución al autor original (alzari555)** dejando intacto el archivo `LICENSE` y los derechos de autor que vienen en él.
 
 ## Despliegue y Uso 
 
