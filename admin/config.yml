@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: alzari555/emebe-pagina
+  repo: MB-interiorismo/studio
   branch: main
   site_domain: emebestudio.com
 
