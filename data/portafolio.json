@@ -1,21 +1,10 @@
 {
   "items": [
     {
-      "title": "test de cpncepto",
-      "description": "una descripcion",
-      "image": "/assets/uploads/EMEBE 3.svg",
-      "format": "landscape",
-      "gallery": [
-        {
-          "image": "/assets/uploads/vxccvzxcbxfcvb_3.webp"
-        }
-      ]
-    },
-    {
-      "title": "titulo",
-      "description": "descripcion",
-      "image": "/assets/uploads/Logo.webp",
-      "format": "landscape",
+      "title": "test",
+      "description": "test",
+      "image": "/assets/uploads/zo.webp",
+      "format": "square",
       "gallery": []
     }
   ]
