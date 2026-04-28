@@ -84,7 +84,11 @@
                 <span class="subtitle">Alcance Nacional</span>
                 <h2>Desde Córdoba para toda la <span class="cursive-text">Argentina</span></h2>
                 <p class="large-text">Nuestro estudio y centro de operaciones está ubicado en <strong>Córdoba capital</strong>, pero contamos con una estructura, logística y un equipo listo para diseñar, tomar y ejecutar proyectos integrales en <strong>cualquier provincia del país</strong>.</p>
-                <img id="map-img" src="" alt="Mapa de proyectos" style="display: none; margin: 3rem auto 0; max-width: 100%; height: auto;">
+                
+                <div id="map-container" style="display: none; margin: 3rem auto 0; max-width: 500px; width: 100%;">
+                    <img id="map-img" src="" alt="Mapa de proyectos" style="width: 100%; height: auto; display: block; margin: 0 auto;">
+                    <p style="font-size: 0.85rem; color: var(--color-text-dark); margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7;">* provincias en las que ya hemos trabajado</p>
+                </div>
             </div>
         </section>
     </main>
@@ -143,12 +147,13 @@
                 }
 
                 // Update Map
+                const mapContainer = document.getElementById('map-container');
                 const mapImg = document.getElementById('map-img');
                 if (data.map_image) {
                     let imgPath = data.map_image.startsWith('/') ? data.map_image.substring(1) : data.map_image;
                     imgPath = imgPath.replace(/\.(png|jpe?g)$/i, '.webp');
                     mapImg.src = `${imgPath}?v=${timestamp}`;
-                    mapImg.style.display = 'block';
+                    if (mapContainer) mapContainer.style.display = 'block';
                 }
             } catch (error) {
                 console.error("Error loading home data:", error);
