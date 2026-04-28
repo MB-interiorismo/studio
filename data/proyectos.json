@@ -11,6 +11,14 @@
           "image": "/assets/uploads/hero_bg.webp"
         }
       ]
+    },
+    {
+      "title": "couadrada",
+      "description": "test",
+      "image": "/assets/uploads/hero_bg.webp",
+      "format": "square",
+      "image_shape": "",
+      "gallery": []
     }
   ]
 }
