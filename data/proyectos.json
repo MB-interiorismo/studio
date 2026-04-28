@@ -3,9 +3,14 @@
     {
       "title": "test",
       "description": "test",
-      "image": "/assets/uploads/zo.webp",
+      "image": "/assets/uploads/services_bg.webp",
       "format": "square",
-      "gallery": []
+      "image_shape": "blob-shape",
+      "gallery": [
+        {
+          "image": "/assets/uploads/hero_bg.webp"
+        }
+      ]
     }
   ]
 }
