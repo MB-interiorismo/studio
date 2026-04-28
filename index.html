@@ -40,8 +40,8 @@
                 </div>
                 <div class="hero-image-wrapper">
                     <div class="offset-frame">
-                        <div class="image-container quarter-circle-tr">
-                            <img src="assets/hero_bg.png" alt="Interiorismo Minimalista">
+                        <div id="hero-frame" class="image-container quarter-circle-tr">
+                            <img id="hero-img" src="assets/hero_bg.png" alt="Interiorismo Minimalista">
                         </div>
                     </div>
                 </div>
@@ -53,8 +53,8 @@
             <div class="container services-grid">
                 <div class="services-image-wrapper">
                     <div class="offset-frame reverse-frame">
-                        <div class="image-container quarter-circle-tr">
-                            <img src="assets/services_bg.png" alt="Diseño de Habitación">
+                        <div id="services-frame" class="image-container quarter-circle-tr">
+                            <img id="services-img" src="assets/services_bg.png" alt="Diseño de Habitación">
                         </div>
                     </div>
                 </div>
@@ -84,6 +84,7 @@
                 <span class="subtitle">Alcance Nacional</span>
                 <h2>Desde Córdoba para toda la <span class="cursive-text">Argentina</span></h2>
                 <p class="large-text">Nuestro estudio y centro de operaciones está ubicado en <strong>Córdoba capital</strong>, pero contamos con una estructura, logística y un equipo listo para diseñar, tomar y ejecutar proyectos integrales en <strong>cualquier provincia del país</strong>.</p>
+                <img id="map-img" src="" alt="Mapa de proyectos" style="display: none; margin: 3rem auto 0; max-width: 100%; height: auto;">
             </div>
         </section>
     </main>
@@ -110,5 +111,46 @@
             <p>Desarrollado por <a href="https://github.com/alzari555" target="_blank">alzari555</a></p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const timestamp = new Date().getTime();
+                const response = await fetch(`data/inicio.json?v=${timestamp}`, { cache: "no-store", headers: { 'Cache-Control': 'no-cache' } });
+                if (!response.ok) return;
+                const data = await response.json();
+                
+                // Update Hero
+                if (data.hero_image) {
+                    let imgPath = data.hero_image.startsWith('/') ? data.hero_image.substring(1) : data.hero_image;
+                    document.getElementById('hero-img').src = `${imgPath}?v=${timestamp}`;
+                }
+                if (data.hero_shape !== undefined) {
+                    const heroFrame = document.getElementById('hero-frame');
+                    heroFrame.className = `image-container ${data.hero_shape}`;
+                }
+
+                // Update Services
+                if (data.services_image) {
+                    let imgPath = data.services_image.startsWith('/') ? data.services_image.substring(1) : data.services_image;
+                    document.getElementById('services-img').src = `${imgPath}?v=${timestamp}`;
+                }
+                if (data.services_shape !== undefined) {
+                    const servicesFrame = document.getElementById('services-frame');
+                    servicesFrame.className = `image-container ${data.services_shape}`;
+                }
+
+                // Update Map
+                const mapImg = document.getElementById('map-img');
+                if (data.map_image) {
+                    let imgPath = data.map_image.startsWith('/') ? data.map_image.substring(1) : data.map_image;
+                    mapImg.src = `${imgPath}?v=${timestamp}`;
+                    mapImg.style.display = 'block';
+                }
+            } catch (error) {
+                console.error("Error loading home data:", error);
+            }
+        });
+    </script>
 </body>
 </html>
