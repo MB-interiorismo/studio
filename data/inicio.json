@@ -1,7 +1,7 @@
 {
-  "hero_image": "/assets/uploads/hero_bg.png",
+  "hero_image": "/assets/uploads/hero_bg.webp",
   "hero_shape": "quarter-circle-tr",
-  "services_image": "/assets/uploads/services_bg.png",
+  "services_image": "/assets/uploads/services_bg.webp",
   "services_shape": "quarter-circle-tr",
-  "map_image": "/assets/uploads/Diseño sin título.png"
+  "map_image": "/assets/uploads/Diseño sin título.webp"
 }
