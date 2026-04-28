@@ -8,13 +8,13 @@ media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
 collections:
-  - name: "portafolio"
-    label: "Portafolio"
+  - name: "proyectos"
+    label: "Proyectos"
     files:
       - label: "Gestor de Proyectos"
         name: "proyectos"
-        file: "data/portafolio.json"
-        description: "Añade, edita y organiza los proyectos que aparecerán en la galería de la página de portafolio."
+        file: "data/proyectos.json"
+        description: "Añade, edita y organiza los proyectos que aparecerán en la galería de la página de proyectos."
         fields:
           - label: "Proyectos"
             name: "items"
