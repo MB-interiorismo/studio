@@ -129,6 +129,7 @@
                     if (imagePath.startsWith('/')) {
                         imagePath = imagePath.substring(1);
                     }
+                    imagePath = imagePath.replace(/\.(png|jpe?g)$/i, '.webp');
                     // We append a query param to dodge caching entirely
                     const imgSrc = `${imagePath}?v=${timestamp}`;
                     
@@ -200,6 +201,7 @@
                 
                 let mainImgPath = item.image || '';
                 if (mainImgPath.startsWith('/')) mainImgPath = mainImgPath.substring(1);
+                mainImgPath = mainImgPath.replace(/\.(png|jpe?g)$/i, '.webp');
                 
                 // Add main image and extra images
                 let html = `<img src="${mainImgPath}?v=${timestamp}" alt="${item.title}" class="main-modal-img">`;
@@ -209,6 +211,7 @@
                         if(gImg.image) {
                             let gImgPath = gImg.image;
                             if (gImgPath.startsWith('/')) gImgPath = gImgPath.substring(1);
+                            gImgPath = gImgPath.replace(/\.(png|jpe?g)$/i, '.webp');
                             html += `<img src="${gImgPath}?v=${timestamp}" alt="Galería de ${item.title}" class="extra-modal-img">`;
                         }
                     });
