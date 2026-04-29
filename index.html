@@ -131,10 +131,8 @@
                     imgPath = imgPath.replace(/\.(png|jpe?g)$/i, '.webp');
                     document.getElementById('hero-img').src = `${imgPath}?v=${timestamp}`;
                 }
-                if (data.hero_shape !== undefined) {
-                    const heroFrame = document.getElementById('hero-frame');
-                    heroFrame.className = `image-container ${data.hero_shape}`;
-                }
+                const heroShape = data.hero_shape || 'quarter-circle-tr';
+                document.getElementById('hero-frame').className = `image-container ${heroShape === 'none' ? '' : heroShape}`;
 
                 // Update Services
                 if (data.services_image) {
@@ -142,10 +140,8 @@
                     imgPath = imgPath.replace(/\.(png|jpe?g)$/i, '.webp');
                     document.getElementById('services-img').src = `${imgPath}?v=${timestamp}`;
                 }
-                if (data.services_shape !== undefined) {
-                    const servicesFrame = document.getElementById('services-frame');
-                    servicesFrame.className = `image-container ${data.services_shape}`;
-                }
+                const servicesShape = data.services_shape || 'quarter-circle-tr';
+                document.getElementById('services-frame').className = `image-container ${servicesShape === 'none' ? '' : servicesShape}`;
 
                 // Update Map
                 const mapContainer = document.getElementById('map-container');
